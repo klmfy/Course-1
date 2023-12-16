@@ -915,72 +915,64 @@
 //}
 
 //#include <iostream>
-//#include <vector>
-//#include <algorithm>  // Добавим заголовочный файл для sort
-//#include <iterator>   // Добавим заголовочный файл для find
-//
-//using namespace std;
-//
-//int main() {
-//    int N;
-//    cin >> N;
-//
-//    vector<int> array(N);
-//
-//    // Ввод массива
-//    for (int i = 0; i < N; ++i) {
-//        cin >> array[i];
-//    }
-//
-//    // Создаем копию массива и сортируем ее
-//    vector<int> sortedArray = array;
-//    sort(sortedArray.begin(), sortedArray.end());
-//
-//    // Находим индекс первого элемента изначального массива в отсортированном массиве
-//    int originalFirstElement = array[0];
-//    auto it = find(sortedArray.begin(), sortedArray.end(), originalFirstElement);
-//
-//    // Проверяем, был ли найден элемент
-//    if (it != sortedArray.end()) {
-//        int indexInSortedArray = distance(sortedArray.begin(), it);
-//        // Выводим результат
-//        cout << indexInSortedArray << endl;
-//    } else {
-//        cerr << "Ошибка: элемент не найден в отсортированном массиве." << endl;
-//    }
-//
-//    return 0;
-//}
 
-//#include <iostream>
 //
+
 //using namespace std;
+
 //
+
 //int main() {
+
 //    // Чтение входных данных
+
 //    int N;
+
 //    cin >> N;
+
 //
+
 //    // Проверка на условие N < 20
+
 //    if (N >= 20) {
+
 //        cout << "N should be less than 20." << endl;
+
 //        return 1; // Возвращаем ненулевой код, чтобы показать ошибку
+
 //    }
+
 //
+
 //    // Создание и заполнение массива
+
 //    int arr[N][N];
+
 //    for (int i = 0; i < N; ++i) {
+
 //        for (int j = 0; j < N; ++j) {
+
 //            if (i == N - j - 1) {
+
 //                arr[i][j] = 0; // На побочной диагонали стоят нули
+
 //            } else if (i > N - j - 1) {
+
 //                arr[i][j] = 1; // Выше диагонали - единицы
+
 //            } else {
+
 //                arr[i][j] = 2; // Ниже диагонали - двойки
+
 //            }
+
 //        }
+
 //    }
+
 //
+
+
 //    // Вывод результата
 //    for (int i = 0; i < N; ++i) {
 //        for (int j = 0; j < N; ++j) {
@@ -1268,3 +1260,38 @@
 //  return 0;
 // }
 
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+ // Чтение входных данных
+ int n, petyaHeight;
+ cin >> n;  // Вводим количество человек в классе
+
+ // Создаем вектор для хранения роста каждого человека
+ vector<int> heights(n);
+
+ // Вводим рост каждого человека в классе
+ for (int i = 0; i < n; ++i) {
+  cin >> heights[i];
+ }
+
+ cin >> petyaHeight;  // Вводим рост Пети
+
+ // Сортировка массива роста в порядке убывания
+ sort(heights.begin(), heights.end(), greater<int>());
+
+ // Находим позицию, куда следует вставить Петю
+ int position = 1;
+ while (position <= n && heights[position - 1] > petyaHeight) {
+  position++;
+ }
+
+ // Вывод результата (позиция, на которой Петя должен встать в строй)
+ cout << position << endl;
+
+ return 0;
+}

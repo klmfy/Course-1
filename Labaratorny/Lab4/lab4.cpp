@@ -74,76 +74,70 @@ int main() {
 
     return 0;
 }
-
-//9-11
+//3
 #include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    // Чтение входных данных
+    int N;
+    cin >> N;
+
+    vector<int> arr(N);
+    for (int i = 0; i < N; ++i) {
+        cin >> arr[i];
+    }
+
+    // Вывод чётных элементов
+    for (int i = 0; i < N; ++i) {
+        if (arr[i] % 2 == 0) {
+            cout << arr[i] << " ";
+        }
+    }
+
+    // Вывод нечётных элементов
+    for (int i = 0; i < N; ++i) {
+        if (arr[i] % 2 != 0) {
+            cout << arr[i] << " ";
+        }
+    }
+
+    cout << endl;
+
+    return 0;
+}
+//4
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
 using namespace std;
 
 int main() {
     int N;
     cin >> N;
 
-    for (int i = 1; i <= N; i++) {
-        for (int j = 1; j <= N - i; j++) {
-            cout << "  ";
-        }
-        cout << "*";
-        if (i >= 2) {
-            cout << " ";
-        }
-        for (int j = 1; j <= i - 2; j++) {
-            cout << "+ ";
-        }
-        if (i >= 2) {
-            cout << "*";
-        }
-        cout << endl;
+    vector<int> array(N);
+
+    for (int i = 0; i < N; ++i) {
+        cin >> array[i];
     }
 
-    for (int i = N - 1; i >= 1; i--) {
-        for (int j = 1; j <= N - i; j++) {
-            cout << "  ";
-        }
-        cout << "*";
-        if (i >= 2) {
-            cout << " ";
-        }
-        for (int j = 1; j <= i - 2; j++) {
-            cout << "+ ";
-        }
-        if (i >= 2) {
-            cout << "*";
-        }
-        cout << endl;
-    }
+    vector<int> sortedArray = array;
+    sort(sortedArray.begin(), sortedArray.end());
 
-    return 0;
-}
-//9-13
+    int originalFirstElement = array[0];
+    auto it = find(sortedArray.begin(), sortedArray.end(), originalFirstElement);
 
-//9-4
-#include <iostream>
-
-using namespace std;
-
-int main() {
-    int X1, Y1, X2, Y2;
-    int X3, Y3, X4, Y4;
-
-    cin >> X1 >> Y1 >> X2 >> Y2;
-    cin >> X3 >> Y3 >> X4 >> Y4;
-
-    int X_left = max(X1, X3);
-    int Y_top = max(Y1, Y3);
-    int X_right = min(X2, X4);
-    int Y_bottom = min(Y2, Y4);
-
-    if (X_left < X_right && Y_top < Y_bottom) {
-        int intersection_area = (X_right - X_left) * (Y_bottom - Y_top);
-        cout << intersection_area << endl;
+    if (it != sortedArray.end()) {
+        int indexInSortedArray = distance(sortedArray.begin(), it);
+        cout << indexInSortedArray << endl;
     } else {
-        cout << 0 << endl;
+        cerr << "Ошибка: элемент не найден в отсортированном массиве." << endl;
     }
 
     return 0;
 }
+
